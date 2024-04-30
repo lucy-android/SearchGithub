@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">SearchGithub</string>
+    <string name="app_name">Search Github</string>
+    <string name="search_screen">Search screen</string>
+    <string name="recent_screen">Recent screen</string>
 </resources>
