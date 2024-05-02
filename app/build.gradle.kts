@@ -91,4 +91,10 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.14.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
     implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+
+    // Paging Compose
+    val pagingVersion = "3.2.1"
+    implementation("androidx.paging:paging-runtime-ktx:$pagingVersion")
+    testImplementation("androidx.paging:paging-common-ktx:$pagingVersion")
+    implementation("androidx.paging:paging-compose:$pagingVersion")
 }
