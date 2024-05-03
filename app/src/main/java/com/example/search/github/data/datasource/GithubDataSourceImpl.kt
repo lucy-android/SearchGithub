@@ -1,7 +1,7 @@
 package com.example.search.github.data.datasource
 
 import com.example.search.github.remote.GithubApi
-import com.example.search.github.remote.GithubResponseModel
+import com.example.search.github.remote.model.GithubResponseModel
 import javax.inject.Inject
 import javax.inject.Singleton
 

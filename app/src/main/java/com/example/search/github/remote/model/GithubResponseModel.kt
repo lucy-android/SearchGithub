@@ -1,4 +1,4 @@
-package com.example.search.github.remote
+package com.example.search.github.remote.model
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
