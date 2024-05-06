@@ -20,15 +20,16 @@ import com.example.search.github.ui.viewmodel.GithubReposViewModel
 @Composable
 fun SearchScreen(viewModel: GithubReposViewModel = hiltViewModel()) {
 
-    viewModel.loadData()
-
     val repoPagingItems: LazyPagingItems<GithubRepositoryDomain> =
         viewModel.state.collectAsLazyPagingItems()
 
     val textFieldValue = remember { mutableStateOf("") }
 
     Column {
-        OutlinedTextField(value = textFieldValue.value, onValueChange = { textFieldValue.value = it })
+        OutlinedTextField(value = textFieldValue.value, onValueChange = { s ->
+            textFieldValue.value = s
+            viewModel.loadData(s)
+        })
 
         LazyColumn(
             modifier = Modifier.fillMaxWidth().padding(vertical = 20.dp)

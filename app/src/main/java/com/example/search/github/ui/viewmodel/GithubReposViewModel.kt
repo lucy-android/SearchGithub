@@ -23,9 +23,9 @@ class GithubReposViewModel @Inject constructor(private val fetchReposUseCase: Fe
         MutableStateFlow(PagingData.empty())
     val state: StateFlow<PagingData<GithubRepositoryDomain>> = _state
 
-    fun loadData() {
+    fun loadData(s: String) {
         viewModelScope.launch(Dispatchers.Default) {
-            fetchReposUseCase.fetchRepos("droid").distinctUntilChanged().cachedIn(viewModelScope)
+            fetchReposUseCase.fetchRepos(s).distinctUntilChanged().cachedIn(viewModelScope)
                 .collectLatest {
                     _state.value = it
                 }
