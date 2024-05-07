@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Singleton
 class GithubRepositoryImpl @Inject constructor(private val githubDataSource: GithubDataSource) :
     GithubRepository {
-    override suspend fun getRepositories(
+    override suspend fun getRepos(
         query: String
     ): Flow<PagingData<GithubRepositoryRemote>> {
         return Pager(config = PagingConfig(pageSize = 10, prefetchDistance = 2),

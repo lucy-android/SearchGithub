@@ -7,27 +7,29 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.example.search.github.domain.model.GithubRepositoryDomain
+import com.example.search.github.domain.model.GithubRepo
 import com.example.search.github.ui.viewmodel.GithubReposViewModel
 
 @Composable
 fun SearchScreen(viewModel: GithubReposViewModel = hiltViewModel()) {
 
-    val repoPagingItems: LazyPagingItems<GithubRepositoryDomain> =
+    val repoPagingItems: LazyPagingItems<GithubRepo> =
         viewModel.state.collectAsLazyPagingItems()
 
-    val textFieldValue = remember { mutableStateOf("") }
+    var textFieldValue by remember { mutableStateOf("") }
 
     Column {
-        OutlinedTextField(value = textFieldValue.value, onValueChange = { s ->
-            textFieldValue.value = s
+        OutlinedTextField(value = textFieldValue, onValueChange = { s ->
+            textFieldValue = s
             viewModel.loadData(s)
         })
 

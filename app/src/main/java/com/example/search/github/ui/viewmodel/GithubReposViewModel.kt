@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.search.github.domain.model.GithubRepositoryDomain
+import com.example.search.github.domain.model.GithubRepo
 import com.example.search.github.domain.usecase.FetchReposUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,9 +19,9 @@ import javax.inject.Inject
 class GithubReposViewModel @Inject constructor(private val fetchReposUseCase: FetchReposUseCase) :
     ViewModel() {
 
-    private val _state: MutableStateFlow<PagingData<GithubRepositoryDomain>> =
+    private val _state: MutableStateFlow<PagingData<GithubRepo>> =
         MutableStateFlow(PagingData.empty())
-    val state: StateFlow<PagingData<GithubRepositoryDomain>> = _state
+    val state: StateFlow<PagingData<GithubRepo>> = _state
 
     fun loadData(s: String) {
         viewModelScope.launch(Dispatchers.Default) {
