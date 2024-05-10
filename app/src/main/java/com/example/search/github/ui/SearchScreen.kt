@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
@@ -63,26 +64,26 @@ fun SearchScreen(viewModel: GithubReposViewModel = hiltViewModel()) {
 
 @Composable
 fun RepoItem(repo: GithubRepo) {
-    Row {
-        Text(modifier = Modifier.weight(1f), text = repo.fullName)
-        FilledIconButton(
-            modifier = Modifier
-                .padding(start = dimensionResource(id = R.dimen.dp5))
-                .size(dimensionResource(id = R.dimen.dp30)),
-            onClick = {
-                // TODO download action
-            }, shape = CircleShape, colors = IconButtonDefaults.filledIconButtonColors(
-                containerColor = MaterialTheme.colorScheme.surface,
-                contentColor = MaterialTheme.colorScheme.primary
-            )
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_download),
-                contentDescription = null
-            )
+    Column {
+        Row {
+            Text(modifier = Modifier.weight(1f), text = repo.fullName)
+            FilledIconButton(
+                modifier = Modifier
+                    .padding(start = dimensionResource(id = R.dimen.dp5))
+                    .size(dimensionResource(id = R.dimen.dp30)),
+                onClick = {
+                    // TODO download action
+                }, shape = CircleShape, colors = IconButtonDefaults.filledIconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    contentColor = MaterialTheme.colorScheme.primary
+                )
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_download),
+                    contentDescription = null
+                )
+            }
         }
-
-
+        Divider()
     }
-
 }
