@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
@@ -24,6 +25,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.search.github.R
@@ -52,10 +54,38 @@ fun SearchScreen(viewModel: GithubReposViewModel = hiltViewModel()) {
                 .fillMaxWidth()
                 .padding(vertical = 20.dp)
         ) {
+            val loadState = repoPagingItems.loadState
             items(repoPagingItems.itemCount) { index ->
                 val repo = repoPagingItems[index]
                 if (repo != null) {
                     RepoItem(repo = repo)
+                }
+            }
+            item {
+                if(loadState.append is LoadState.Loading){
+                    CircularProgressIndicator()
+                }
+
+                if (loadState.refresh is LoadState.Loading && textFieldValue.isNotEmpty()) {
+                    CircularProgressIndicator()
+                } else if(loadState.refresh is LoadState.Loading){
+                    EmptyResult(
+                        modifier = Modifier
+                            .padding(vertical = dimensionResource(id = R.dimen.dp10))
+                            .fillParentMaxSize(),
+                        text = "Type something"
+                    )
+                }
+                when (val refresh = loadState.refresh) {
+                    is LoadState.Error -> {
+                        EmptyResult(
+                            modifier = Modifier
+                                .padding(vertical = dimensionResource(id = R.dimen.dp10))
+                                .fillParentMaxSize()
+                        )
+                    }
+
+                    else -> {}
                 }
             }
         }
@@ -86,4 +116,9 @@ fun RepoItem(repo: GithubRepo) {
         }
         Divider()
     }
+}
+
+@Composable
+fun EmptyResult(modifier: Modifier = Modifier, text: String = "No results were obtained") {
+    Text(text = text)
 }
