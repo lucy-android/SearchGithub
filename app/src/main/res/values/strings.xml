@@ -2,4 +2,6 @@
     <string name="app_name">Search Github</string>
     <string name="search_screen">Search screen</string>
     <string name="recent_screen">Recent screen</string>
+    <string name="type_something">Type something</string>
+    <string name="no_results_were_obtained">No results were obtained</string>
 </resources>
