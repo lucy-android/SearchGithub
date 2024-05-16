@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -32,9 +33,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.search.github.MainActivity
 import com.example.search.github.R
 import com.example.search.github.domain.model.GithubRepo
 import com.example.search.github.ui.viewmodel.GithubReposViewModel
+import com.example.search.github.utils.findActivity
 
 @Composable
 fun SearchScreen(viewModel: GithubReposViewModel = hiltViewModel()) {
@@ -102,6 +105,7 @@ fun SearchScreen(viewModel: GithubReposViewModel = hiltViewModel()) {
 
 @Composable
 fun RepoItem(modifier: Modifier = Modifier, repo: GithubRepo) {
+    val context = LocalContext.current
     Column {
         Row {
             Text(modifier = modifier.weight(1f).align(Alignment.CenterVertically), text = repo.fullName)
@@ -111,7 +115,7 @@ fun RepoItem(modifier: Modifier = Modifier, repo: GithubRepo) {
                     .align(Alignment.CenterVertically)
                     .size(dimensionResource(id = R.dimen.dp30)),
                 onClick = {
-                    // TODO download action
+                    (context.findActivity() as MainActivity).beginDownload()
                 }, shape = CircleShape, colors = IconButtonDefaults.filledIconButtonColors(
                     containerColor = MaterialTheme.colorScheme.surface,
                     contentColor = MaterialTheme.colorScheme.primary
