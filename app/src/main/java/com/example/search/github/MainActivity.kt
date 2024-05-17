@@ -65,7 +65,7 @@ class MainActivity : ComponentActivity() {
 
     @SuppressLint("Range")
     fun beginDownload() {
-        val url = "https://api.github.com/?q=33&page=1&per_page=1"
+        val url = "https://api.github.com/search/repositories?q=33&page=1&per_page=1"
         var fileName = "1.pdf"
         val storageDir =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)?.path
